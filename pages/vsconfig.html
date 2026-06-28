@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Configuration</title>
+    <style>
+        :root {
+            --bg-color: #1e1e1e;
+            --header-bg: #2d2d2d;
+            --text-color: #d4d4d4;
+            --keyword-color: #569cd6;
+            --string-color: #ce9178;
+            --number-color: #b5cea8;
+            --property-color: #9cdcfe;
+            --border-color: #444;
+            --font-family: 'Consolas', 'Courier New', monospace;
+        }
+
+        body {
+            background-color: #121212;
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .code-pallet {
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 800px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .code-header {
+            background-color: var(--header-bg);
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mac-controls {
+            display: flex;
+            gap: 8px;
+            margin-right: 15px;
+        }
+
+        .mac-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .close { background-color: #ff5f56; }
+        .minimize { background-color: #ffbd2e; }
+        .maximize { background-color: #27c93f; }
+
+        .file-title {
+            color: #999;
+            font-size: 14px;
+            font-family: var(--font-family);
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-left: auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .code-content {
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        pre {
+            margin: 0;
+            font-family: var(--font-family);
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--text-color);
+        }
+
+        /* Basic syntax highlighting simulation */
+        .token.property { color: var(--property-color); }
+        .token.string { color: var(--string-color); }
+        .token.number { color: var(--number-color); }
+        .token.boolean { color: var(--keyword-color); }
+        .token.punctuation { color: var(--text-color); }
+    </style>
+</head>
+<body>
+
+    <div class="code-pallet">
+        <div class="code-header">
+            <div class="mac-controls">
+                <div class="mac-btn close"></div>
+                <div class="mac-btn minimize"></div>
+                <div class="mac-btn maximize"></div>
+            </div>
+            <div class="file-title">keybindings.json</div>
+            <button class="copy-btn" id="copyBtn">Copy</button>
+        </div>
+        <div class="code-content">
+            <pre><code id="codeBlock"></code></pre>
+        </div>
+    </div>
+
+    <!-- YOU CAN UPDATE YOUR JSON DATA HERE -->
+    <script id="rawJson" type="application/json">
+[
+  {
+    "key": "alt+j",
+    "command": "-default.command"
+  },
+  {
+    "key": "alt+j",
+    "command": "cursorLeft",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+k",
+    "command": "-default.command"
+  },
+  {
+    "key": "alt+k",
+    "command": "cursorDown",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+l",
+    "command": "-default.command"
+  },
+  {
+    "key": "alt+l",
+    "command": "cursorRight",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+i",
+    "command": "-default.command"
+  },
+  {
+    "key": "alt+i",
+    "command": "cursorUp",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+j",
+    "command": "-default.command"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "-default.command"
+  },
+  {
+    "key": "ctrl+shift+j",
+    "command": "cursorWordLeftSelect",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "-default.command"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "-default.command"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "cursorWordRightSelect",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+e",
+    "command": "-workbench.view.explorer"
+  },
+  {
+    "key": "ctrl+shift+e",
+    "command": "editor.action.deleteLines",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+h",
+    "command": "workbench.action.terminal.toggleTerminal"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "-default.command"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "cursorWordLeft",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "-default.command"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "cursorWordRight",
+    "when": "editorTextFocus"
+  }
+]
+    </script>
+
+    <script>
+        // Syntax highlighting function
+        function syntaxHighlight(json) {
+            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                let cls = 'number';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'property';
+                    } else {
+                        cls = 'string';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'boolean';
+                } else if (/null/.test(match)) {
+                    cls = 'null';
+                }
+                
+                if (cls === 'property') {
+                    // Extract the property name and the colon
+                    let prop = match.substring(0, match.length - 1);
+                    return '<span class="token ' + cls + '">' + prop + '</span><span class="token punctuation">:</span>';
+                }
+                
+                return '<span class="token ' + cls + '">' + match + '</span>';
+            }).replace(/([\[\]{}])/g, '<span class="token punctuation">$1</span>')
+              .replace(/(,)/g, '<span class="token punctuation">$1</span>');
+        }
+
+        const rawJsonText = document.getElementById('rawJson').textContent.trim();
+        const codeBlock = document.getElementById('codeBlock');
+        const copyBtn = document.getElementById('copyBtn');
+
+        // Apply syntax highlighting
+        codeBlock.innerHTML = syntaxHighlight(rawJsonText);
+
+        // Copy functionality
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(rawJsonText).then(() => {
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Copied!';
+                copyBtn.style.color = '#27c93f';
+                copyBtn.style.borderColor = '#27c93f';
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                    copyBtn.style.color = '';
+                    copyBtn.style.borderColor = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        });
+    </script>
+</body>
+</html>
