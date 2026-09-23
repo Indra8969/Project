@@ -1,0 +1,2458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team Alronix | Resident Robotics Program (RRP) - MyEquation</title>
+  <style>
+    /* ==========================================================================
+       CSS VARIABLES & THEME — MINIMAL & NEUTRAL (NO AI COLORS)
+       ========================================================================== */
+    :root {
+      --bg-color: #0c0d0e;
+      --surface-color: #141518;
+      --surface-hover: #191b1f;
+      --text-main: #f2f2f3;
+      --text-muted: #8b8e96;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.16);
+      --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif;
+      --transition-speed: 0.25s;
+    }
+
+    /* ==========================================================================
+       GLOBAL RESETS & PRESENTATION FRAME
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .presentation {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* ==========================================================================
+       SLIDES CONTAINER & ANIMATIONS
+       ========================================================================== */
+    .slides-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(2rem, 5vh, 4rem) clamp(2rem, 6vw, 5rem);
+      text-align: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.98) translateY(8px);
+      transition: opacity var(--transition-speed) ease,
+                  transform var(--transition-speed) ease,
+                  visibility var(--transition-speed);
+      pointer-events: none;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1) translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Content Typography & Elements - Clean, Solid, No Gradient Gimmicks */
+    .slide h1 {
+      font-size: clamp(2.4rem, 5.2vw, 3.8rem);
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      color: var(--text-main);
+    }
+
+    .slide h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.25rem;
+      color: var(--text-main);
+    }
+
+    .slide p {
+      font-size: clamp(1rem, 1.6vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 720px;
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+    }
+
+    .slide ul {
+      text-align: left;
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      color: var(--text-muted);
+      line-height: 2;
+      max-width: 640px;
+      margin: 0 auto;
+      list-style-position: inside;
+    }
+
+    .slide li strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.85rem;
+      margin-bottom: 1.25rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      max-width: 1040px;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem 1.6rem;
+      text-align: left;
+      transition: border-color var(--transition-speed) ease, background var(--transition-speed) ease;
+    }
+
+    .card:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-hover);
+    }
+
+    .card-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6c6f78;
+      margin-bottom: 0.4rem;
+      font-weight: 500;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.65rem;
+      letter-spacing: -0.015em;
+    }
+
+    .card p {
+      font-size: 0.925rem;
+      color: var(--text-muted);
+      margin-bottom: 0;
+      line-height: 1.55;
+    }
+
+    .card-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .card-list li {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .card-list li strong {
+      color: var(--text-main);
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .card-list li span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .specs-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+
+    .spec-item {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-variant-numeric: tabular-nums;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .spec-item strong {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    kbd {
+      font-family: inherit;
+      background: #191a1d;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.16);
+      color: #e4e4e7;
+      padding: 0.15rem 0.45rem;
+      border-radius: 5px;
+      font-size: 0.825rem;
+    }
+
+    /* ==========================================================================
+       SPLIT WORKFLOW & TERMINAL STYLES (SLIDE 3)
+       ========================================================================== */
+    .split-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 2.5rem;
+      max-width: 1040px;
+      width: 100%;
+      align-items: center;
+      text-align: left;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 860px) {
+      .split-layout {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    .split-narrative h2 {
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .split-narrative p.lead {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 1.2rem;
+      max-width: 440px;
+    }
+
+    .split-narrative code {
+      font-family: 'SF Mono', Menlo, Consolas, Monaco, monospace;
+      font-size: 0.82em;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+      color: #e4e4e7;
+    }
+
+    .workflow-features {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .workflow-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .workflow-num {
+      font-size: 0.68rem;
+      font-weight: 600;
+      font-family: monospace;
+      color: var(--text-muted);
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      width: 24px;
+      height: 24px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    .workflow-text h4 {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 0.15rem;
+    }
+
+    .workflow-text p {
+      font-size: 0.785rem;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    /* Minimalist Terminal Box */
+    .terminal-box {
+      background: #101114;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+    }
+
+    .terminal-header {
+      background: #15161a;
+      padding: 0.65rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .terminal-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .terminal-title {
+      font-size: 0.725rem;
+      color: #71717a;
+      font-family: monospace;
+      margin-left: 0.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    .terminal-body {
+      padding: 1.15rem 1.35rem;
+      font-family: 'SF Mono', Menlo, Consolas, Monaco, monospace;
+      font-size: 0.76rem;
+      line-height: 1.65;
+      color: #a1a1aa;
+      text-align: left;
+    }
+
+    .term-cmd {
+      color: #f4f4f5;
+      font-weight: 500;
+    }
+
+    .term-comment {
+      color: #52525b;
+    }
+
+    .term-ok {
+      color: #e4e4e7;
+      font-weight: 500;
+    }
+
+    .term-val {
+      color: #d4d4d8;
+    }
+
+    /* ==========================================================================
+       JOURNEY / TIMELINE STYLES (SLIDE 4)
+       ========================================================================== */
+    .journey-container {
+      max-width: 1040px;
+      width: 100%;
+      text-align: left;
+    }
+
+    .journey-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .journey-timeline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      position: relative;
+    }
+
+    @media (max-width: 860px) {
+      .journey-timeline {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+
+    .journey-card {
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.4rem 1.5rem;
+      position: relative;
+      transition: border-color var(--transition-speed) ease, background var(--transition-speed) ease;
+    }
+
+    .journey-card:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-hover);
+    }
+
+    .journey-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.85rem;
+    }
+
+    .phase-badge {
+      font-family: monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .phase-tag {
+      font-size: 0.68rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #a1a1aa;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .journey-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.015em;
+    }
+
+    .journey-card p {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .journey-takeaway {
+      margin-top: 1.5rem;
+      background: rgba(20, 21, 24, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .journey-takeaway {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+    }
+
+    .slide .journey-takeaway p.takeaway-quote,
+    .journey-takeaway .takeaway-quote {
+      font-size: 0.88rem;
+      color: var(--text-main);
+      font-style: italic;
+      line-height: 1.5;
+      border-left: 2px solid rgba(255, 255, 255, 0.25);
+      padding-left: 1rem;
+      margin: 0 !important;
+      margin-bottom: 0 !important;
+      max-width: 680px;
+    }
+
+    .takeaway-metrics {
+      display: flex;
+      gap: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .takeaway-stat {
+      text-align: right;
+    }
+
+    .takeaway-stat .stat-num {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-main);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .takeaway-stat .stat-label {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 0.15rem;
+    }
+
+    /* ==========================================================================
+       AUTONOMOUS PIPELINE / ACT STYLES (SLIDE 5)
+       ========================================================================== */
+    .pipeline-container {
+      max-width: 1040px;
+      width: 100%;
+      text-align: left;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+
+    .pipeline-header {
+      text-align: center;
+      margin-bottom: 1.6rem;
+    }
+
+    .pipeline-header h2 {
+      font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.45rem;
+      color: var(--text-main);
+    }
+
+    .slide .pipeline-subtitle,
+    .pipeline-subtitle {
+      font-size: clamp(0.88rem, 1.35vw, 1.05rem);
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto !important;
+      line-height: 1.5;
+    }
+
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.15rem;
+      width: 100%;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    @media (max-width: 960px) {
+      .pipeline-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+
+    .pipeline-card {
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.35rem 1.45rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+      transition: border-color var(--transition-speed) ease, background var(--transition-speed) ease, transform var(--transition-speed) ease;
+    }
+
+    .pipeline-card:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    .pipeline-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .pipeline-step-badge {
+      font-family: monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .pipeline-stage-tag {
+      font-size: 0.65rem;
+      padding: 0.15rem 0.48rem;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #a1a1aa;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 500;
+    }
+
+    .pipeline-card h3 {
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.015em;
+    }
+
+    .slide .pipeline-card p,
+    .pipeline-card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin: 0 !important;
+      margin-bottom: 0 !important;
+    }
+
+    .pipeline-cmd {
+      margin: 0.85rem 0 0.65rem 0;
+      padding: 0.45rem 0.7rem;
+      background: #0f1013;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 6px;
+      font-family: 'SF Mono', Menlo, Consolas, Monaco, monospace;
+      font-size: 0.71rem;
+      color: #d4d4d8;
+      overflow-x: auto;
+      white-space: nowrap;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .pipeline-cmd::-webkit-scrollbar {
+      height: 3px;
+    }
+
+    .pipeline-cmd::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 3px;
+    }
+
+    .pipeline-cmd code {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    .pipeline-cmd .cmd-prefix {
+      color: #71717a;
+      user-select: none;
+      margin-right: 0.35rem;
+    }
+
+    .pipeline-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.35rem;
+    }
+
+    .pipeline-tag-item {
+      font-size: 0.675rem;
+      color: #9ca3af;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.065);
+      padding: 0.18rem 0.48rem;
+      border-radius: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Bottom Architecture Flow Strip */
+    .pipeline-flow {
+      margin-top: 1.35rem;
+      background: rgba(20, 21, 24, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 960px) {
+      .pipeline-flow {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+      }
+      .flow-arrow {
+        transform: rotate(90deg);
+        align-self: center;
+      }
+    }
+
+    .flow-node {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      flex: 1 1 0;
+      min-width: 0;
+    }
+
+    .flow-node-index {
+      font-family: monospace;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .flow-node-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .flow-node-title {
+      font-size: 0.775rem;
+      font-weight: 500;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .flow-node-meta {
+      font-size: 0.66rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .flow-arrow {
+      color: rgba(255, 255, 255, 0.22);
+      font-size: 0.8rem;
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================================
+       EXPERIENCE & MEMBER DEBRIEF STYLES (SLIDE 6)
+       ========================================================================== */
+    .feedback-container {
+      max-width: 1060px;
+      width: 100%;
+      text-align: left;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+
+    .feedback-header {
+      text-align: center;
+      margin-bottom: 1.35rem;
+    }
+
+    .feedback-header h2 {
+      font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.4rem;
+      color: var(--text-main);
+    }
+
+    .slide .feedback-subtitle,
+    .feedback-subtitle {
+      font-size: clamp(0.85rem, 1.3vw, 1rem);
+      color: var(--text-muted);
+      max-width: 660px;
+      margin: 0 auto !important;
+      line-height: 1.45;
+    }
+
+    .feedback-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.95rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 960px) {
+      .feedback-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.85rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .feedback-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .feedback-card {
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.15rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
+      position: relative;
+      transition: border-color var(--transition-speed) ease, background var(--transition-speed) ease, transform var(--transition-speed) ease;
+    }
+
+    .feedback-card:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    .feedback-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .feedback-member-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      min-width: 0;
+    }
+
+    .feedback-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: #1b1c20;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      font-size: 0.68rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: monospace;
+    }
+
+    .feedback-name-group {
+      min-width: 0;
+    }
+
+    .feedback-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .feedback-role {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .feedback-domain-pill {
+      font-family: monospace;
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: #a1a1aa;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+
+    .slide .feedback-card p.feedback-quote,
+    .feedback-card .feedback-quote {
+      font-size: 0.79rem;
+      color: #d4d4d8;
+      line-height: 1.5;
+      font-style: italic;
+      margin: 0 !important;
+      margin-bottom: 0.75rem !important;
+      position: relative;
+    }
+
+    .feedback-takeaway {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.68rem;
+      color: #9ca3af;
+      padding-top: 0.6rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .feedback-takeaway strong {
+      color: #e4e4e7;
+      font-weight: 500;
+    }
+
+    /* ==========================================================================
+       FUTURE VISION & DESKTOP ASSISTANT STYLES (SLIDE 6)
+       ========================================================================== */
+    .vision-container {
+      max-width: 1060px;
+      width: 100%;
+      text-align: left;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+
+    .vision-header {
+      text-align: center;
+      margin-bottom: 1.35rem;
+    }
+
+    .vision-header h2 {
+      font-size: clamp(1.75rem, 3.2vw, 2.45rem);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.35rem;
+      color: var(--text-main);
+    }
+
+    .slide .vision-subtitle,
+    .vision-subtitle {
+      font-size: clamp(0.85rem, 1.3vw, 0.98rem);
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto !important;
+      line-height: 1.45;
+    }
+
+    .vision-main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 1.15rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 900px) {
+      .vision-main-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+
+    .vision-card {
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.3rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
+      transition: border-color var(--transition-speed) ease, background var(--transition-speed) ease;
+    }
+
+    .vision-card:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-hover);
+    }
+
+    .vision-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.65rem;
+    }
+
+    .vision-tag {
+      font-size: 0.65rem;
+      padding: 0.15rem 0.48rem;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #a1a1aa;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 500;
+      font-family: monospace;
+    }
+
+    .vision-card h3 {
+      font-size: 1.12rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.45rem;
+      letter-spacing: -0.015em;
+    }
+
+    .slide .vision-card p,
+    .vision-card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.48;
+      margin: 0 !important;
+      margin-bottom: 0.75rem !important;
+    }
+
+    /* Left: Feature points */
+    .vision-points {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin: 0.4rem 0 0.85rem 0;
+    }
+
+    .vision-point-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
+    }
+
+    .vision-point-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #a1a1aa;
+      margin-top: 0.45rem;
+      flex-shrink: 0;
+    }
+
+    .vision-point-text {
+      font-size: 0.78rem;
+      color: #d4d4d8;
+      line-height: 1.38;
+    }
+
+    .vision-point-text strong {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    /* Left: Specs footer */
+    .vision-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .vision-spec-item {
+      font-size: 0.68rem;
+      color: #9ca3af;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 0.18rem 0.5rem;
+      border-radius: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Right: Safety Tier Blocks */
+    .safety-tiers {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 0.25rem;
+    }
+
+    .safety-tier-item {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 0.7rem 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      transition: border-color var(--transition-speed) ease, background var(--transition-speed) ease;
+    }
+
+    .safety-tier-item:hover {
+      background: rgba(255, 255, 255, 0.045);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .tier-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .tier-title {
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .tier-badge {
+      font-family: monospace;
+      font-size: 0.62rem;
+      font-weight: 600;
+      padding: 0.1rem 0.38rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .tier-badge-1 {
+      background: rgba(255, 255, 255, 0.08);
+      color: #f4f4f5;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .tier-badge-2 {
+      background: rgba(255, 255, 255, 0.06);
+      color: #d4d4d8;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .tier-badge-3 {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .slide .safety-tier-item p,
+    .safety-tier-item p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.38;
+      margin: 0 !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* Bottom Foundation Strip */
+    .vision-foundation {
+      margin-top: 1.15rem;
+      background: rgba(20, 21, 24, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.8rem 1.3rem;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.95rem;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    @media (max-width: 860px) {
+      .vision-foundation {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .vision-foundation {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .foundation-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .foundation-label {
+      font-family: monospace;
+      font-size: 0.64rem;
+      color: #71717a;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .foundation-val {
+      font-size: 0.775rem;
+      font-weight: 500;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+
+    /* ==========================================================================
+       CLOSING SLIDE & MEME STYLES (SLIDE 8)
+       ========================================================================== */
+    .closing-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .slide .closing-subtitle,
+    .closing-subtitle {
+      font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+      color: var(--text-muted);
+      margin: 0 auto 1.35rem auto !important;
+      line-height: 1.4;
+    }
+
+    .meme-frame {
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 0.55rem;
+      box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.7);
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      transition: border-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+    }
+
+    .meme-frame:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    .meme-image {
+      width: clamp(230px, 28vw, 300px);
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+    }
+
+    /* ==========================================================================
+       TEAM ALRONIX STYLES (SLIDE 1)
+       ========================================================================== */
+    .team-header {
+      margin-bottom: 1.75rem;
+      text-align: center;
+    }
+
+    .program-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.95rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .team-title {
+      font-size: clamp(2.6rem, 6vw, 4.4rem);
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+      color: var(--text-main);
+      letter-spacing: -0.04em;
+    }
+
+    .team-subtitle {
+      font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(240px, 1fr));
+      gap: 1rem;
+      max-width: 1040px;
+      width: 100%;
+      margin-top: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 580px) {
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .member-card {
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.95rem 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      text-align: left;
+      transition: border-color var(--transition-speed) ease, background var(--transition-speed) ease, transform var(--transition-speed) ease;
+    }
+
+    .member-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-hover);
+      background: var(--surface-hover);
+    }
+
+    .member-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: #1c1d21;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      font-weight: 500;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      letter-spacing: 0.04em;
+    }
+
+    .member-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .member-name {
+      font-size: 0.975rem;
+      font-weight: 500;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: -0.01em;
+    }
+
+    .lead-badge {
+      font-size: 0.625rem;
+      padding: 0.12rem 0.45rem;
+      background: rgba(255, 255, 255, 0.07);
+      color: #e4e4e7;
+      border-radius: 4px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .member-role {
+      font-size: 0.785rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+      line-height: 1.35;
+      font-weight: 400;
+    }
+
+    /* ==========================================================================
+       PROGRESS BAR
+       ========================================================================== */
+    .progress-bar-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.04);
+      z-index: 100;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #e4e4e7;
+      transition: width var(--transition-speed) ease;
+    }
+
+    /* ==========================================================================
+       NAVIGATION & CONTROLS
+       ========================================================================== */
+    .controls {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 100;
+      background: rgba(21, 22, 25, 0.85);
+      padding: 0.35rem 0.65rem;
+      border-radius: 9999px;
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+    }
+
+    .counter {
+      font-size: 0.8rem;
+      font-variant-numeric: tabular-nums;
+      color: var(--text-muted);
+      padding: 0 0.5rem;
+      font-weight: 500;
+    }
+
+    .btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .btn:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+    }
+
+    .btn:disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+    }
+
+    .btn-fs {
+      font-size: 0.8rem;
+      border-left: 1px solid var(--border-color);
+      border-radius: 0;
+      padding-left: 0.65rem;
+      width: auto;
+    }
+
+    /* ==========================================================================
+       CUSTOM HARDWARE CURSOR
+       ========================================================================== */
+    @media (hover: hover) and (pointer: fine) {
+      body, a, button, [role="button"], input, textarea {
+        cursor: none !important;
+      }
+    }
+
+    .custom-cursor-dot,
+    .custom-cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      border-radius: 50%;
+      z-index: 99999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      will-change: transform;
+    }
+
+    .custom-cursor-dot {
+      width: 5px;
+      height: 5px;
+      background-color: #f4f4f5;
+      transform: translate3d(-100px, -100px, 0);
+    }
+
+    .custom-cursor-ring {
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: rgba(255, 255, 255, 0.02);
+      transform: translate3d(-100px, -100px, 0);
+      transition: opacity 0.3s ease, width 0.22s cubic-bezier(0.16, 1, 0.3, 1), height 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background 0.2s ease;
+    }
+
+    /* Hover state over interactive elements */
+    body.cursor-hover .custom-cursor-ring {
+      width: 44px;
+      height: 44px;
+      border-color: rgba(255, 255, 255, 0.55);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(2px);
+    }
+
+    body.cursor-hover .custom-cursor-dot {
+      opacity: 0.6;
+    }
+
+    /* Active / Click press */
+    body.cursor-active .custom-cursor-ring {
+      width: 22px;
+      height: 22px;
+      border-color: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .cursor-visible {
+      opacity: 1 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Hardware Cursor -->
+  <div class="custom-cursor-dot" id="cursorDot"></div>
+  <div class="custom-cursor-ring" id="cursorRing"></div>
+
+  <div class="presentation" id="presentation">
+    <!-- Progress Indicator -->
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Slides Container -->
+    <div class="slides-container">
+      <!-- Slide 1: Title & Team Alronix Introduction -->
+      <section class="slide active">
+        <div class="team-header">
+          <div class="program-tag">
+            Resident Robotics Program (RRP) &mdash; MyEquation
+          </div>
+          <h1 class="team-title">Team Alronix</h1>
+          <p class="team-subtitle">Robotics Engineering & Autonomous Systems</p>
+        </div>
+
+        <div class="team-grid">
+          <!-- Member 1 -->
+          <div class="member-card">
+            <div class="member-avatar">IS</div>
+            <div class="member-info">
+              <div class="member-name">Indra Suthar <span class="lead-badge">Lead</span></div>
+              <div class="member-role">Team Lead & Systems / Robotics Software</div>
+            </div>
+          </div>
+
+          <!-- Member 2 -->
+          <div class="member-card">
+            <div class="member-avatar">KS</div>
+            <div class="member-info">
+              <div class="member-name">Kavya Suthar</div>
+              <div class="member-role">Hardware & Embedded Bus Architecture</div>
+            </div>
+          </div>
+
+          <!-- Member 3 -->
+          <div class="member-card">
+            <div class="member-avatar">MP</div>
+            <div class="member-info">
+              <div class="member-name">Meet Patel</div>
+              <div class="member-role">Mechanical Design, CAD & Kinematics</div>
+            </div>
+          </div>
+
+          <!-- Member 4 -->
+          <div class="member-card">
+            <div class="member-avatar">NP</div>
+            <div class="member-info">
+              <div class="member-name">Narendra Patel</div>
+              <div class="member-role">Firmware, Drivers & Calibration</div>
+            </div>
+          </div>
+
+          <!-- Member 5 -->
+          <div class="member-card">
+            <div class="member-avatar">NK</div>
+            <div class="member-info">
+              <div class="member-name">Nehal Kotdiya</div>
+              <div class="member-role">Computer Vision & Autonomous Control</div>
+            </div>
+          </div>
+
+          <!-- Member 6 -->
+          <div class="member-card">
+            <div class="member-avatar">MK</div>
+            <div class="member-info">
+              <div class="member-name">Maunas K</div>
+              <div class="member-role">Simulation, Testing & Quality Assurance</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 2: Hardware & Actuation Setup -->
+      <section class="slide">
+        <span class="badge">Hardware Setup</span>
+        <h2>Actuation & Bus Architecture</h2>
+        <p>Dual serial-bus servo system engineered for high joint torque, rapid grip response, and telemetry.</p>
+
+        <div class="grid-cards">
+          <!-- Card 1: Motor Configuration -->
+          <div class="card">
+            <div class="card-label">Actuation Strategy</div>
+            <h3>Dual-Motor Pairing</h3>
+            <ul class="card-list">
+              <li>
+                <strong>ST3215 &mdash; Arm Joints</strong>
+                <span>High torque (30 kg·cm @ 12V, 45 RPM) for payload stability & link articulation.</span>
+              </li>
+              <li>
+                <strong>ST3215-HS &mdash; Gripper</strong>
+                <span>High speed (106 RPM @ 12V, 20 kg·cm) for rapid pick-and-place response.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card 2: Bus Architecture -->
+          <div class="card">
+            <div class="card-label">Topology & Interface</div>
+            <h3>TTL Daisy Chain</h3>
+            <ul class="card-list">
+              <li>
+                <strong>Unified 3-Wire Bus</strong>
+                <span>Shared D / V / G line at 1 Mbps minimizes harness bulk & complexity.</span>
+              </li>
+              <li>
+                <strong>Waveshare Adapter (A)</strong>
+                <span>CH343 USB-C bridge (9–12.6V, 5A peak) supporting synchronous control.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card 3: Closed-Loop Feedback -->
+          <div class="card">
+            <div class="card-label">Precision & Health</div>
+            <h3>Closed-Loop Telemetry</h3>
+            <ul class="card-list">
+              <li>
+                <strong>12-Bit Resolution</strong>
+                <span>4096 steps/360° (0.088° precision) with calibrated absolute zero.</span>
+              </li>
+              <li>
+                <strong>Live State Monitoring</strong>
+                <span>Real-time feedback on position, velocity, load, voltage & temperature.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Minimal Specs Strip -->
+        <div class="specs-strip">
+          <div class="spec-item">Voltage: <strong>12V DC</strong></div>
+          <div class="spec-item">Bus Speed: <strong>1.0 Mbps</strong></div>
+          <div class="spec-item">Resolution: <strong>4096 Steps / 360°</strong></div>
+          <div class="spec-item">Feedback: <strong>Full Telemetry</strong></div>
+        </div>
+      </section>
+
+      <!-- Slide 3: Software Tooling & Custom Scripts (Split Layout with Terminal) -->
+      <section class="slide">
+        <div class="split-layout">
+          <!-- Left Column: Narrative & Architecture -->
+          <div class="split-narrative">
+            <span class="badge">Development & Version Control</span>
+            <h2>Git Workflow & Custom Scripts</h2>
+            <p class="lead">Managing our <code>alronix-arm</code> codebase on GitHub with custom Python tooling under <code>Robot-Arm/</code> for device discovery, calibration, and live teleoperation.</p>
+
+            <div class="workflow-features">
+              <div class="workflow-item">
+                <div class="workflow-num">01</div>
+                <div class="workflow-text">
+                  <h4>GitHub Repository & Core Module</h4>
+                  <p>Learned Git collaboration with PRs and branch isolation; built <code>servo_core.py</code> for FEETECH ST3215 serial-bus control.</p>
+                </div>
+              </div>
+
+              <div class="workflow-item">
+                <div class="workflow-num">02</div>
+                <div class="workflow-text">
+                  <h4>Port Discovery & Servo Ping</h4>
+                  <p><code>ping_servos.py ports</code> scans USB adapters; <code>ping</code> tests servo response across IDs 1&ndash;6 at 1.0 Mbps.</p>
+                </div>
+              </div>
+
+              <div class="workflow-item">
+                <div class="workflow-num">03</div>
+                <div class="workflow-text">
+                  <h4>ID Allocation & Angle Limit Calibration</h4>
+                  <p>Dynamic ID assignment and persistent travel bounds stored in <code>angle_limits.json</code> to prevent mechanical overtravel.</p>
+                </div>
+              </div>
+
+              <div class="workflow-item">
+                <div class="workflow-num">04</div>
+                <div class="workflow-text">
+                  <h4>Keyboard Control & Teleoperation Mirroring</h4>
+                  <p>Real-time motor jogging via <code>keyboard_control.py</code> and bilateral leader-follower mirroring via <code>mirror_servos.py</code>.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Terminal Preview -->
+          <div class="terminal-box">
+            <div class="terminal-header">
+              <div class="terminal-dot"></div>
+              <div class="terminal-dot"></div>
+              <div class="terminal-dot"></div>
+              <span class="terminal-title">alronix-arm/Robot-Arm &mdash; bash</span>
+            </div>
+            <div class="terminal-body">
+              <span class="term-comment"># 1. Discover USB adapter & ping servos</span><br />
+              <span class="term-cmd">$ python Robot-Arm/ping_servos.py ports</span><br />
+              <span class="term-ok">[OK]</span> <span class="term-val">Found adapter on /dev/ttyUSB0 (1.0 Mbps)</span><br />
+              <span class="term-cmd">$ python Robot-Arm/ping_servos.py ping --device /dev/ttyUSB0 --ids 1-6</span><br />
+              <span class="term-ok">[OK]</span> <span class="term-val">Servos 1..6 responding online</span><br /><br />
+              <span class="term-comment"># 2. Calibrate ID & verify center pulse</span><br />
+              <span class="term-cmd">$ python Robot-Arm/ping_servos.py set-id --current-id 1 --new-id 7</span><br />
+              <span class="term-cmd">$ python Robot-Arm/ping_servos.py move --id 1 --pulse 2048</span><br />
+              <span class="term-ok">[OK]</span> <span class="term-val">Target pulse 2048 reached (180.0&deg;)</span><br /><br />
+              <span class="term-comment"># 3. Interactive keyboard teleoperation</span><br />
+              <span class="term-cmd">$ python Robot-Arm/keyboard_control.py --device /dev/ttyUSB0</span><br />
+              <span class="term-ok">[ACTIVE]</span> <span class="term-val">Jogging: [W/S] M1  [A/D] M2  [I/K] M3  [J/L] M4</span><br /><br />
+              <span class="term-comment"># 4. Leader-follower teleoperation mirroring</span><br />
+              <span class="term-cmd">$ python Robot-Arm/mirror_servos.py --port1 /dev/ttyUSB0 --port2 /dev/ttyUSB1 --max-delta 25</span><br />
+              <span class="term-ok">[STREAM]</span> <span class="term-val">Leader &rarr; Follower | Slew: 25 p/tick (~1250 p/s)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 4: The LeRobot Journey & Calibration Loop -->
+      <section class="slide">
+        <div class="journey-container">
+          <div class="journey-header">
+            <span class="badge">Integration Journey</span>
+            <h2>The LeRobot Calibration Loop</h2>
+            <p style="margin: 0 auto; max-width: 660px;">Three to four days of recurring calibration errors, drift desyncs, and the deep engineering intuition gained from solving them.</p>
+          </div>
+
+          <div class="journey-timeline">
+            <!-- Phase 1 -->
+            <div class="journey-card">
+              <div class="journey-card-top">
+                <span class="phase-badge">PHASE 01</span>
+                <span class="phase-tag">The Endless Loop</span>
+              </div>
+              <h3>Calibration & Drift Hell</h3>
+              <p>Struggled continuously with initial LeRobot setup. Every calibration pass drifted, threw communication timeouts, or misread zero offsets. We were trapped in an edit-calibrate-fail loop for days.</p>
+            </div>
+
+            <!-- Phase 2 -->
+            <div class="journey-card">
+              <div class="journey-card-top">
+                <span class="phase-badge">PHASE 02</span>
+                <span class="phase-tag">Root Cause Analysis</span>
+              </div>
+              <h3>Isolating Hardware Realities</h3>
+              <p>Stopped guessing and dissected the hardware: TTL bus timing at 1.0 Mbps, encoder center steps (2048/4096), and mechanical backlash vs. software expectation.</p>
+            </div>
+
+            <!-- Phase 3 -->
+            <div class="journey-card">
+              <div class="journey-card-top">
+                <span class="phase-badge">PHASE 03</span>
+                <span class="phase-tag">The Breakthrough</span>
+              </div>
+              <h3>LeRobot Calibration Solved</h3>
+              <p>Mastered LeRobot&rsquo;s native calibration workflow: accurately establishing joint boundaries, storing verified calibration profiles, and achieving stable leader-follower teleoperation.</p>
+            </div>
+          </div>
+
+          <!-- Bottom Reflection Banner -->
+          <div class="journey-takeaway">
+            <p class="takeaway-quote">&ldquo;We spent 3 to 4 days stuck in a calibration loop. What felt like lost time became our steepest learning curve in hardware-software synchronization.&rdquo;</p>
+            <div class="takeaway-metrics">
+              <div class="takeaway-stat">
+                <div class="stat-num">3&ndash;4 Days</div>
+                <div class="stat-label">Debugging Loop</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 5: Data Recording, ACT Training & Autonomous Deployment -->
+      <section class="slide">
+        <div class="pipeline-container">
+          <div class="pipeline-header">
+            <span class="badge">Autonomous Learning Pipeline</span>
+            <h2>Data Recording, ACT Training &amp; Inference</h2>
+            <p class="pipeline-subtitle">Capturing multimodal teleoperation demonstrations, training Action Chunking Transformers, and deploying closed-loop autonomous policies.</p>
+          </div>
+
+          <div class="pipeline-grid">
+            <!-- Stage 1 -->
+            <div class="pipeline-card">
+              <div>
+                <div class="pipeline-card-top">
+                  <span class="pipeline-step-badge">STAGE 01</span>
+                  <span class="pipeline-stage-tag">Dataset Capture</span>
+                </div>
+                <h3>Multimodal Teleoperation Recording</h3>
+                <p>Synchronized 50 Hz data collection across leader-follower arms. Simultaneously logging 6-DOF joint positions and dual USB camera streams (overhead + wrist) into native LeRobot dataset format.</p>
+              </div>
+              <div>
+                <div class="pipeline-cmd">
+                  <span class="cmd-prefix">$</span><code>python -m lerobot.record --robot-type so100 --fps 50</code>
+                </div>
+                <div class="pipeline-tags">
+                  <span class="pipeline-tag-item">50 Hz Telemetry</span>
+                  <span class="pipeline-tag-item">Dual RGB Streams</span>
+                  <span class="pipeline-tag-item">LeRobot v2 Dataset</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stage 2 -->
+            <div class="pipeline-card">
+              <div>
+                <div class="pipeline-card-top">
+                  <span class="pipeline-step-badge">STAGE 02</span>
+                  <span class="pipeline-stage-tag">Imitation Learning</span>
+                </div>
+                <h3>ACT Policy Architecture Training</h3>
+                <p>Supervised training using Action Chunking with Transformers (ACT). A CVAE encodes human demonstration variability while the transformer decoder predicts 50 consecutive future actions to prevent compounding errors.</p>
+              </div>
+              <div>
+                <div class="pipeline-cmd">
+                  <span class="cmd-prefix">$</span><code>python -m lerobot.train --policy act --batch-size 8</code>
+                </div>
+                <div class="pipeline-tags">
+                  <span class="pipeline-tag-item">Transformer Backbone</span>
+                  <span class="pipeline-tag-item">CVAE Latent Modeling</span>
+                  <span class="pipeline-tag-item">k=50 Action Chunks</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stage 3 -->
+            <div class="pipeline-card">
+              <div>
+                <div class="pipeline-card-top">
+                  <span class="pipeline-step-badge">STAGE 03</span>
+                  <span class="pipeline-stage-tag">Autonomous Inference</span>
+                </div>
+                <h3>Pretrained Closed-Loop Execution</h3>
+                <p>Live deployment on the physical follower arm. The pretrained ACT policy processes real-time camera frames and proprioceptive joint state at 50 Hz, executing autonomous manipulation with zero human intervention.</p>
+              </div>
+              <div>
+                <div class="pipeline-cmd">
+                  <span class="cmd-prefix">$</span><code>python -m lerobot.eval --policy act --eval-episodes 10</code>
+                </div>
+                <div class="pipeline-tags">
+                  <span class="pipeline-tag-item">Real-Time Inference</span>
+                  <span class="pipeline-tag-item">Visual Servoing</span>
+                  <span class="pipeline-tag-item">100% Autonomous Follower</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Architecture Flow Strip -->
+          <div class="pipeline-flow">
+            <div class="flow-node">
+              <div class="flow-node-index">01</div>
+              <div class="flow-node-content">
+                <div class="flow-node-title">Dual Cameras &amp; Telemetry</div>
+                <div class="flow-node-meta">Overhead + Wrist RGB @ 50Hz</div>
+              </div>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-node">
+              <div class="flow-node-index">02</div>
+              <div class="flow-node-content">
+                <div class="flow-node-title">ACT Policy Network</div>
+                <div class="flow-node-meta">CVAE + ResNet Backbone</div>
+              </div>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-node">
+              <div class="flow-node-index">03</div>
+              <div class="flow-node-content">
+                <div class="flow-node-title">50-Step Action Chunk</div>
+                <div class="flow-node-meta">Smooth Joint Trajectories</div>
+              </div>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-node">
+              <div class="flow-node-index">04</div>
+              <div class="flow-node-content">
+                <div class="flow-node-title">Follower Arm Execution</div>
+                <div class="flow-node-meta">Autonomous Closed-Loop Control</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 6: Future Vision — Desktop Assistant & Safe Path Planning -->
+      <section class="slide">
+        <div class="vision-container">
+          <div class="vision-header">
+            <span class="badge">Future Horizon &bull; Next-Gen Application</span>
+            <h2>Desktop Assistant &amp; Dynamic Safe Path Planning</h2>
+            <p class="vision-subtitle">Applying our bus telemetry, calibration rigor, and imitation learning to engineer a compact tabletop robotic arm that organizes workstations with human-aware collision avoidance.</p>
+          </div>
+
+          <div class="vision-main-grid">
+            <!-- Left Card: Desktop Assistant Concept -->
+            <div class="vision-card">
+              <div>
+                <div class="vision-card-header">
+                  <span class="vision-tag">Form Factor &bull; Workspace Assistant</span>
+                </div>
+                <h3>The Intelligent Desktop Organizer</h3>
+                <p>A quiet, compact tabletop manipulator engineered to live on the workstation, autonomously sorting cables, stationery, mugs, and tools without disturbing fragile items.</p>
+
+                <div class="vision-points">
+                  <div class="vision-point-item">
+                    <div class="vision-point-dot"></div>
+                    <div class="vision-point-text"><strong>Gentle Dextrous Handling:</strong> Active motor current sensing prevents crushing fragile items like ceramic mugs and smartphone displays.</div>
+                  </div>
+                  <div class="vision-point-item">
+                    <div class="vision-point-dot"></div>
+                    <div class="vision-point-text"><strong>Semantic Clutter Sorting:</strong> Multimodal visual policy identifies objects and sorts them into organized desktop zones.</div>
+                  </div>
+                  <div class="vision-point-item">
+                    <div class="vision-point-dot"></div>
+                    <div class="vision-point-text"><strong>Zero-Distraction Operation:</strong> Smooth, non-jerky trajectory execution operating unobtrusively in peripheral view.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="vision-specs">
+                <span class="vision-spec-item">Base: &lt; 120mm</span>
+                <span class="vision-spec-item">Payload: 350g</span>
+                <span class="vision-spec-item">Noise: &lt; 35 dBA</span>
+                <span class="vision-spec-item">Control: 50Hz Closed-Loop</span>
+              </div>
+            </div>
+
+            <!-- Right Card: 3-Tier Safe Path Detection Engine -->
+            <div class="vision-card">
+              <div>
+                <div class="vision-card-header">
+                  <span class="vision-tag">Safety Core &bull; Dynamic Reactive Loop</span>
+                </div>
+                <h3>3-Tier Reactive Safe Path Engine</h3>
+                <p>Workstations are unpredictable: hands reach for coffee and phones move. The arm tracks a continuous 3D safety envelope with graded, real-time safety responses:</p>
+
+                <div class="safety-tiers">
+                  <!-- Tier 1 -->
+                  <div class="safety-tier-item">
+                    <div class="tier-header">
+                      <div class="tier-title">Tier 1: Dynamic Path Rerouting</div>
+                      <span class="tier-badge tier-badge-1">Proximity &gt; 15 cm</span>
+                    </div>
+                    <p>When a hand or obstacle enters the trajectory, the motion planner calculates a collision-free alternate spline in real-time (&lt;15ms) to bypass the obstacle without pausing.</p>
+                  </div>
+
+                  <!-- Tier 2 -->
+                  <div class="safety-tier-item">
+                    <div class="tier-header">
+                      <div class="tier-title">Tier 2: Adaptive Deceleration</div>
+                      <span class="tier-badge tier-badge-2">Proximity 5&ndash;15 cm</span>
+                    </div>
+                    <p>If spatial clearance narrows, the controller throttles joint speed and torque by 60&ndash;80%, drastically reducing kinetic energy while maintaining precision micro-adjustments.</p>
+                  </div>
+
+                  <!-- Tier 3 -->
+                  <div class="safety-tier-item">
+                    <div class="tier-header">
+                      <div class="tier-title">Tier 3: Compliant E-Stop &amp; Backdrive</div>
+                      <span class="tier-badge tier-badge-3">Proximity &lt; 5 cm / Contact</span>
+                    </div>
+                    <p>Immediate sub-10ms motor stop. Joint torque drops into a compliant backdrivable floating state, eliminating pinch risks and preventing tipped-over drinks.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Foundation Strip -->
+          <div class="vision-foundation">
+            <div class="foundation-item">
+              <span class="foundation-label">1.0 Mbps Bus Telemetry &rarr;</span>
+              <span class="foundation-val">Sub-10ms Load &amp; Obstacle Impact Sensing</span>
+            </div>
+            <div class="foundation-item">
+              <span class="foundation-label">Calibration Rigor &rarr;</span>
+              <span class="foundation-val">Zero-Drift Millimeter Safety Envelopes</span>
+            </div>
+            <div class="foundation-item">
+              <span class="foundation-label">ACT Policy Models &rarr;</span>
+              <span class="foundation-val">Generalized Dextrous Clutter Sorting</span>
+            </div>
+            <div class="foundation-item">
+              <span class="foundation-label">Slew-Rate Clamping &rarr;</span>
+              <span class="foundation-val">Non-Jerky Collaborative Motion</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 7: Team Perspectives & Debrief -->
+      <section class="slide">
+        <div class="feedback-container">
+          <div class="feedback-header">
+            <span class="badge">Team Retrospective</span>
+            <h2>Engineering Debrief &amp; Member Voices</h2>
+            <p class="feedback-subtitle">Candid reflections on hardware realities, communication bottlenecks, and lessons learned building the SO-101 autonomous stack.</p>
+          </div>
+
+          <div class="feedback-grid">
+            <!-- Member 1: Indra -->
+            <div class="feedback-card">
+              <div>
+                <div class="feedback-card-top">
+                  <div class="feedback-member-meta">
+                    <div class="feedback-avatar">IS</div>
+                    <div class="feedback-name-group">
+                      <div class="feedback-name">Indra Suthar <span class="lead-badge">Lead</span></div>
+                      <div class="feedback-role">Systems &amp; Architecture</div>
+                    </div>
+                  </div>
+                  <span class="feedback-domain-pill">Systems</span>
+                </div>
+                <p class="feedback-quote">&ldquo;Robotics taught me that algorithms don&rsquo;t matter until communication is rock solid. Half our battles weren&rsquo;t the AI&mdash;they were serial port drops, USB permissions, and coordinating Git workflows across six developers.&rdquo;</p>
+              </div>
+              <div class="feedback-takeaway">
+                <span><strong>Key Lesson:</strong> Fail-safe hardware comms before high-level logic.</span>
+              </div>
+            </div>
+
+            <!-- Member 2: Kavya -->
+            <div class="feedback-card">
+              <div>
+                <div class="feedback-card-top">
+                  <div class="feedback-member-meta">
+                    <div class="feedback-avatar">KS</div>
+                    <div class="feedback-name-group">
+                      <div class="feedback-name">Kavya Suthar</div>
+                      <div class="feedback-role">Bus &amp; Embedded Hardware</div>
+                    </div>
+                  </div>
+                  <span class="feedback-domain-pill">Embedded</span>
+                </div>
+                <p class="feedback-quote">&ldquo;Daisy-chaining 6 serial servos on a shared 1 Mbps TTL bus sounded simple on paper until voltage drops and bus collisions rebooted the arm mid-stroke. Real hardware never forgives bad wiring.&rdquo;</p>
+              </div>
+              <div class="feedback-takeaway">
+                <span><strong>Key Lesson:</strong> Power distribution &amp; line noise dictate stability.</span>
+              </div>
+            </div>
+
+            <!-- Member 3: Meet -->
+            <div class="feedback-card">
+              <div>
+                <div class="feedback-card-top">
+                  <div class="feedback-member-meta">
+                    <div class="feedback-avatar">MP</div>
+                    <div class="feedback-name-group">
+                      <div class="feedback-name">Meet Patel</div>
+                      <div class="feedback-role">CAD &amp; Kinematics</div>
+                    </div>
+                  </div>
+                  <span class="feedback-domain-pill">Mechanical</span>
+                </div>
+                <p class="feedback-quote">&ldquo;CAD is an idealized world. Physical 3D prints have layer shrinkage, joint friction, and gear backlash. Calibrating physical zero so the gripper didn&rsquo;t bind on its own brackets was a major reality check.&rdquo;</p>
+              </div>
+              <div class="feedback-takeaway">
+                <span><strong>Key Lesson:</strong> Design for print tolerances and mechanical compliance.</span>
+              </div>
+            </div>
+
+            <!-- Member 4: Narendra -->
+            <div class="feedback-card">
+              <div>
+                <div class="feedback-card-top">
+                  <div class="feedback-member-meta">
+                    <div class="feedback-avatar">NP</div>
+                    <div class="feedback-name-group">
+                      <div class="feedback-name">Narendra Patel</div>
+                      <div class="feedback-role">Firmware &amp; Calibration</div>
+                    </div>
+                  </div>
+                  <span class="feedback-domain-pill">Firmware</span>
+                </div>
+                <p class="feedback-quote">&ldquo;Those 4 days stuck in the LeRobot calibration loop tested our sanity. But manually diagnosing 4096-step encoder registers and EEPROM offsets gave us an intuitive feel for servo telemetry.&rdquo;</p>
+              </div>
+              <div class="feedback-takeaway">
+                <span><strong>Key Lesson:</strong> Low-level register inspection beats black-box tools.</span>
+              </div>
+            </div>
+
+            <!-- Member 5: Nehal -->
+            <div class="feedback-card">
+              <div>
+                <div class="feedback-card-top">
+                  <div class="feedback-member-meta">
+                    <div class="feedback-avatar">NK</div>
+                    <div class="feedback-name-group">
+                      <div class="feedback-name">Nehal Kotdiya</div>
+                      <div class="feedback-role">Vision &amp; ACT Policy</div>
+                    </div>
+                  </div>
+                  <span class="feedback-domain-pill">Vision / AI</span>
+                </div>
+                <p class="feedback-quote">&ldquo;Watching the ACT transformer policy execute its first autonomous pick-and-place&mdash;taking dual camera frames and moving the follower arm with zero human input&mdash;made every failed training run worth it.&rdquo;</p>
+              </div>
+              <div class="feedback-takeaway">
+                <span><strong>Key Lesson:</strong> Synchronized multimodal data drives policy success.</span>
+              </div>
+            </div>
+
+            <!-- Member 6: Maunas -->
+            <div class="feedback-card">
+              <div>
+                <div class="feedback-card-top">
+                  <div class="feedback-member-meta">
+                    <div class="feedback-avatar">MK</div>
+                    <div class="feedback-name-group">
+                      <div class="feedback-name">Maunas K</div>
+                      <div class="feedback-role">Simulation, Testing &amp; QA</div>
+                    </div>
+                  </div>
+                  <span class="feedback-domain-pill">QA &amp; Safety</span>
+                </div>
+                <p class="feedback-quote">&ldquo;Simulators are forgiving; physical teleoperation is brutal on motors. Implementing slew-rate limits and monitoring real-time servo thermals saved us from burning out ST3215s during long recording sessions.&rdquo;</p>
+              </div>
+              <div class="feedback-takeaway">
+                <span><strong>Key Lesson:</strong> Slew-rate clamping &amp; thermal guards protect hardware.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 8: Closing Slide -->
+      <section class="slide">
+        <div class="closing-container">
+          <span class="badge">Team Alronix &bull; RRP</span>
+          <h2>Thank You!</h2>
+          <div class="meme-frame">
+            <img src="../assets/images/alronix-arm-presentation-meme.jpg" alt="Team Alronix Robotics Meme" class="meme-image" />
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- On-screen Controls -->
+    <div class="controls">
+      <button class="btn" id="prevBtn" title="Previous Slide (← / ↑ / Backspace)">❮</button>
+      <span class="counter" id="slideCounter">1 / 8</span>
+      <button class="btn" id="nextBtn" title="Next Slide (→ / ↓ / Space)">❯</button>
+      <button class="btn btn-fs" id="fullscreenBtn" title="Toggle Fullscreen (F)">⛶</button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       LOGIC & INTERACTION SCRIPTS
+       ========================================================================== -->
+  <script>
+    // State
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const totalSlides = slides.length;
+    let currentIndex = 0;
+
+    // DOM Elements
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const slideCounter = document.getElementById('slideCounter');
+    const progressBar = document.getElementById('progressBar');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+    // Display a slide at a specific index
+    function goToSlide(index) {
+      if (index < 0 || index >= totalSlides) return;
+
+      slides[currentIndex].classList.remove('active');
+      currentIndex = index;
+      slides[currentIndex].classList.add('active');
+
+      updateUI();
+      updateHash();
+    }
+
+    function nextSlide() {
+      if (currentIndex < totalSlides - 1) {
+        goToSlide(currentIndex + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentIndex > 0) {
+        goToSlide(currentIndex - 1);
+      }
+    }
+
+    // Update UI counters, buttons, and progress bar
+    function updateUI() {
+      slideCounter.textContent = `${currentIndex + 1} / ${totalSlides}`;
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex === totalSlides - 1;
+
+      const progress = ((currentIndex + 1) / totalSlides) * 100;
+      progressBar.style.width = `${progress}%`;
+    }
+
+    // Sync current slide with URL hash (e.g., #2)
+    function updateHash() {
+      window.location.hash = `#${currentIndex + 1}`;
+    }
+
+    function readHash() {
+      const hash = parseInt(window.location.hash.replace('#', ''), 10);
+      if (!isNaN(hash) && hash >= 1 && hash <= totalSlides) {
+        goToSlide(hash - 1);
+      } else {
+        updateUI();
+      }
+    }
+
+    // Toggle Fullscreen
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.warn(`Fullscreen request failed: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen().catch(err => {
+          console.warn(`Exit fullscreen failed: ${err.message}`);
+        });
+      }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      // Don't trigger if focus is on form inputs
+      if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+      switch (e.key) {
+        case 'ArrowRight':
+        case 'ArrowDown':
+        case ' ':
+        case 'PageDown':
+          e.preventDefault();
+          nextSlide();
+          break;
+        case 'ArrowLeft':
+        case 'ArrowUp':
+        case 'Backspace':
+        case 'PageUp':
+          e.preventDefault();
+          prevSlide();
+          break;
+        case 'Home':
+          e.preventDefault();
+          goToSlide(0);
+          break;
+        case 'End':
+          e.preventDefault();
+          goToSlide(totalSlides - 1);
+          break;
+        case 'f':
+        case 'F':
+          e.preventDefault();
+          toggleFullscreen();
+          break;
+      }
+    });
+
+    // Touch swipe support for mobile/tablets
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const threshold = 50;
+      const diff = touchEndX - touchStartX;
+      if (Math.abs(diff) > threshold) {
+        if (diff < 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+
+    // Event Listeners for UI Controls
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+    window.addEventListener('hashchange', readHash);
+
+    // Initial load
+    readHash();
+
+    // ==========================================================================
+    // CUSTOM HARDWARE CURSOR LOGIC
+    // ==========================================================================
+    (function initCustomCursor() {
+      const cursorDot = document.getElementById('cursorDot');
+      const cursorRing = document.getElementById('cursorRing');
+
+      if (!cursorDot || !cursorRing) return;
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+      let mouseX = -100, mouseY = -100;
+      let ringX = -100, ringY = -100;
+      let isVisible = false;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        if (!isVisible) {
+          isVisible = true;
+          cursorDot.classList.add('cursor-visible');
+          cursorRing.classList.add('cursor-visible');
+        }
+
+        // Instant dot tracking
+        cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+      });
+
+      window.addEventListener('mouseleave', () => {
+        isVisible = false;
+        cursorDot.classList.remove('cursor-visible');
+        cursorRing.classList.remove('cursor-visible');
+      });
+
+      window.addEventListener('mouseenter', () => {
+        isVisible = true;
+        cursorDot.classList.add('cursor-visible');
+        cursorRing.classList.add('cursor-visible');
+      });
+
+      window.addEventListener('mousedown', () => {
+        document.body.classList.add('cursor-active');
+      });
+
+      window.addEventListener('mouseup', () => {
+        document.body.classList.remove('cursor-active');
+      });
+
+      // Smooth lag follower ring
+      function renderCursor() {
+        const ease = 0.18;
+        ringX += (mouseX - ringX) * ease;
+        ringY += (mouseY - ringY) * ease;
+
+        cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+        requestAnimationFrame(renderCursor);
+      }
+      requestAnimationFrame(renderCursor);
+
+      // Interactive hover feedback
+      const hoverSelector = 'button, a, .card, .member-card, .journey-card, .btn, kbd, .workflow-item, .spec-item, .badge, .program-tag, .pipeline-card, .flow-node, .pipeline-tag-item, .feedback-card, .feedback-avatar, .feedback-domain-pill, .vision-card, .safety-tier-item, .vision-spec-item, .foundation-item, .meme-frame';
+      document.addEventListener('mouseover', (e) => {
+        if (e.target.closest(hoverSelector)) {
+          document.body.classList.add('cursor-hover');
+        }
+      });
+
+      document.addEventListener('mouseout', (e) => {
+        if (e.target.closest(hoverSelector)) {
+          document.body.classList.remove('cursor-hover');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
