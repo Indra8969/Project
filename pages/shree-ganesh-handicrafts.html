@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shree Ganesh Handicrafts | Handcrafted Wooden Temples & Mandirs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --wood-dark: #2c1a0e;
+      --wood-primary: #5c341b;
+      --wood-warm: #8b4513;
+      --wood-accent: #c4823f;
+      --gold: #d4af37;
+      --gold-light: #f7e7b4;
+      --cream: #fbf8f3;
+      --cream-card: #f4ede2;
+      --text-dark: #221c17;
+      --text-muted: #6b635b;
+      --white: #ffffff;
+      --border-color: rgba(139, 69, 19, 0.15);
+      --shadow-sm: 0 4px 6px -1px rgba(44, 26, 14, 0.08);
+      --shadow-md: 0 10px 25px -5px rgba(44, 26, 14, 0.12);
+      --shadow-lg: 0 20px 35px -8px rgba(44, 26, 14, 0.18);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .brand-font {
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.5px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Top Banner */
+    .top-announcement {
+      background: linear-gradient(90deg, #1f1107 0%, #3e210e 50%, #1f1107 100%);
+      color: var(--gold-light);
+      padding: 8px 16px;
+      font-size: 0.825rem;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .top-announcement span.highlight {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: rgba(251, 248, 243, 0.96);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--wood-primary), var(--wood-dark));
+      border: 2px solid var(--gold);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      box-shadow: 0 4px 10px rgba(92, 52, 27, 0.25);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text .title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--wood-dark);
+      line-height: 1.1;
+    }
+
+    .logo-text .subtitle {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--wood-accent);
+      font-weight: 600;
+    }
+
+    .header-contact-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(92, 52, 27, 0.05);
+      border: 1px solid var(--border-color);
+      padding: 8px 18px;
+      border-radius: var(--radius-sm);
+    }
+
+    .badge-icon {
+      color: var(--wood-warm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .badge-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .badge-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--wood-accent);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .badge-value {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--wood-dark);
+      line-height: 1.2;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      letter-spacing: 0.3px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--wood-primary), var(--wood-dark));
+      color: var(--gold-light);
+      border: 1px solid var(--gold);
+      box-shadow: 0 4px 14px rgba(44, 26, 14, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--wood-dark), #150b05);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(44, 26, 14, 0.35);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--wood-dark);
+      border: 1.5px solid var(--wood-primary);
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(92, 52, 27, 0.08);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding: 64px 0 84px;
+      position: relative;
+      background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.08), transparent 60%),
+                  radial-gradient(circle at bottom left, rgba(139, 69, 19, 0.05), transparent 60%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .hero-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background-color: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: var(--wood-primary);
+      border-radius: 30px;
+      font-size: 0.825rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-size: 3.2rem;
+      line-height: 1.15;
+      color: var(--wood-dark);
+      margin-bottom: 22px;
+    }
+
+    .hero-title span {
+      color: var(--wood-warm);
+      position: relative;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 34px;
+      max-width: 540px;
+      line-height: 1.7;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 36px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .stat-item h4 {
+      font-size: 1.7rem;
+      color: var(--wood-dark);
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-item p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Hero Images Showcase */
+    .hero-image-showcase {
+      position: relative;
+    }
+
+    .main-image-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 8px solid var(--white);
+      background-color: var(--cream-card);
+      transition: transform 0.4s ease;
+    }
+
+    .main-image-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .main-image-card img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(34, 28, 23, 0.88);
+      backdrop-filter: blur(8px);
+      color: var(--gold);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .floating-card {
+      position: absolute;
+      bottom: -24px;
+      left: -28px;
+      background: var(--white);
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border: 1px solid var(--border-color);
+      max-width: 290px;
+      animation: floatBadge 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatBadge {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-8px); }
+    }
+
+    .floating-card-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--cream-card);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--wood-warm);
+      flex-shrink: 0;
+    }
+
+    .floating-card-content h5 {
+      font-size: 0.95rem;
+      color: var(--wood-dark);
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .floating-card-content p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Small Wooden Temples Collection Grid */
+    .collection-section {
+      padding: 60px 0 80px;
+      background-color: var(--white);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 50px;
+    }
+
+    .section-subtitle {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--wood-accent);
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .section-title {
+      font-size: 2.3rem;
+      color: var(--wood-dark);
+      margin-bottom: 14px;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+    }
+
+    .temple-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .temple-card {
+      background: var(--cream);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .temple-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(196, 130, 63, 0.4);
+    }
+
+    .temple-thumb {
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+      background-color: var(--cream-card);
+    }
+
+    .temple-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .temple-card:hover .temple-thumb img {
+      transform: scale(1.06);
+    }
+
+    .temple-wood-tag {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(44, 26, 14, 0.85);
+      backdrop-filter: blur(4px);
+      color: var(--gold-light);
+      padding: 4px 10px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .temple-details {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .temple-category {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--wood-accent);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .temple-name {
+      font-size: 1.2rem;
+      color: var(--wood-dark);
+      margin-bottom: 8px;
+    }
+
+    .temple-specs {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .temple-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border-color);
+    }
+
+    .price-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .price-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .price-val {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--wood-primary);
+    }
+
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 0.825rem;
+    }
+
+    /* Craftsmanship Features */
+    .features-section {
+      padding: 70px 0;
+      background-color: var(--cream);
+    }
+
+    .feature-boxes {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .feature-box {
+      background: var(--white);
+      padding: 26px 20px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .feature-box:hover {
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-3px);
+    }
+
+    .feature-icon-wrapper {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 16px;
+      background: var(--cream-card);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--wood-warm);
+    }
+
+    .feature-box h4 {
+      font-size: 1rem;
+      color: var(--wood-dark);
+      margin-bottom: 8px;
+    }
+
+    .feature-box p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Footer Section */
+    .site-footer {
+      background: linear-gradient(180deg, #24140b 0%, #150b05 100%);
+      color: #dfd8cf;
+      padding-top: 70px;
+      border-top: 3px solid var(--gold);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1.3fr 1.3fr;
+      gap: 50px;
+      padding-bottom: 50px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-col h3.footer-heading {
+      color: var(--gold);
+      font-size: 1.15rem;
+      margin-bottom: 22px;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 8px;
+    }
+
+    .footer-col h3.footer-heading::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 32px;
+      height: 2px;
+      background-color: var(--wood-accent);
+    }
+
+    .footer-about p {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #bfb5aa;
+      margin-bottom: 20px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+      transition: var(--transition);
+    }
+
+    .social-btn:hover {
+      background: var(--gold);
+      color: var(--wood-dark);
+      transform: translateY(-2px);
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      font-size: 0.88rem;
+      color: #bfb5aa;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+      padding-left: 4px;
+    }
+
+    /* Contact Details */
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .contact-icon {
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .contact-text {
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .contact-text span.label {
+      display: block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      color: var(--wood-accent);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+
+    .contact-text a {
+      color: #dfd8cf;
+    }
+
+    .contact-text a:hover {
+      color: var(--gold);
+    }
+
+    /* Newsletter & Hours */
+    .hours-badge {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 20px;
+    }
+
+    .hours-badge p {
+      font-size: 0.82rem;
+      color: #bfb5aa;
+      margin-bottom: 4px;
+    }
+
+    .hours-badge strong {
+      color: var(--gold-light);
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .newsletter-input {
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .newsletter-input:focus {
+      border-color: var(--gold);
+    }
+
+    .footer-bottom {
+      padding: 24px 0;
+      font-size: 0.8rem;
+      color: #93897e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-bottom-links a:hover {
+      color: var(--gold);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .hero-title {
+        font-size: 2.6rem;
+      }
+      .temple-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .feature-boxes {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-contact-badge {
+        display: none;
+      }
+      .nav-wrapper {
+        justify-content: center;
+      }
+      .hero-title {
+        font-size: 2.1rem;
+      }
+      .temple-grid {
+        grid-template-columns: 1fr;
+      }
+      .feature-boxes {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .floating-card {
+        position: static;
+        margin-top: 16px;
+        max-width: 100%;
+        animation: none;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-announcement">
+    <span>✨ Festive Special: <span class="highlight">Up to 25% Off</span> on All Hand-Carved Teakwood Temples</span>
+    <span>•</span>
+    <span>📞 Free Artisan Consultation: +1 (800) 555-WOOD</span>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <div class="nav-wrapper">
+        <!-- Logo -->
+        <div class="brand-logo">
+          <div class="logo-icon" aria-hidden="true">
+            <!-- Mandir / Temple SVG Icon -->
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v3m0 0l7 5v11a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V10l7-5z"/>
+              <path d="M9 21v-7a3 3 0 0 1 6 0v7"/>
+              <circle cx="12" cy="4" r="1" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="logo-text">
+            <span class="title">Shree Ganesh</span>
+            <span class="subtitle">Handicrafts</span>
+          </div>
+        </div>
+
+        <!-- Workshop Support Info (No navigation links) -->
+        <div class="header-contact-badge">
+          <div class="badge-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </div>
+          <div class="badge-content">
+            <span class="badge-label">Artisan Workshop Line</span>
+            <span class="badge-value">+91 99740 23338</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero-section" id="hero">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <!-- Hero Text Content -->
+          <div class="hero-content">
+            <div class="hero-tagline">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              Master Woodcraft & Vastu Compliant
+            </div>
+            <h1 class="hero-title">
+              Sacred Grace For Your Home With <span>Wooden Temples</span>
+            </h1>
+            <p class="hero-description">
+              Elevate your prayer sanctuary with meticulously hand-carved small wooden mandirs. Crafted from 100% seasoned teak and sheesham wood, customized to fit modern apartments and serene prayer rooms.
+            </p>
+            
+            <div class="hero-stats">
+              <div class="stat-item">
+                <h4>14+</h4>
+                <p>Years of Carving</p>
+              </div>
+              <div class="stat-item">
+                <h4>100%</h4>
+                <p>Solid Seasoned Wood</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Image Showcase -->
+          <div class="hero-image-showcase">
+            <div class="main-image-card">
+              <img 
+                src="https://img.magnific.com/premium-photo/indian-wedding-mandap-made-with-wood-with-indian-motif-garlands_1279562-25364.jpg"
+              >
+              <div class="image-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+                Most Loved Compact Model
+              </div>
+            </div>
+
+            <!-- Floating Trust Element -->
+            <div class="floating-card">
+              <div class="floating-card-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <path d="M9 12l2 2 4-4"/>
+                </svg>
+              </div>
+              <div class="floating-card-content">
+                <h5>Vastu & Termite Proof</h5>
+                <p>Pre-treated teakwood with lifelong natural wood finish</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Small Wooden Temples Collection Section -->
+    <section class="collection-section" id="collection">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Our Handcrafted Collection</span>
+          <h2 class="section-title">Compact & Small Wooden Temples</h2>
+          <p class="section-desc">
+            Specially designed for compact spaces, prayer corners, and wall mountings without compromising on spiritual sanctity or traditional architectural grandeur.
+          </p>
+        </div>
+
+        <div class="temple-grid">
+          
+          <!-- Card 1 -->
+          <article class="temple-card">
+            <div class="temple-thumb">
+              <img 
+                src="https://img.magnific.com/premium-photo/luxury-fireplace-isolated-white_336475-304.jpg" 
+                alt="Ananta Mini Wall-Hanging Mandir"
+              >
+              <span class="temple-wood-tag">Wooden Wood</span>
+            </div>
+            <div class="temple-details">
+              <span class="temple-category">Wall-Hanging / Tabletop</span>
+              <h3 class="temple-name">Wooden Mandir</h3>
+              <p class="temple-specs">
+                Features brass bell carvings, pull-out bhog/diya tray, and compact storage drawer. Fits 12" to 18" idols gracefully.
+              </p>
+              <div class="temple-footer">
+                <div class="price-box">
+                  <span class="price-label">Starting at</span>
+                  <span class="price-val">$189.00</span>
+                </div>
+                <a href="#contact" class="btn btn-secondary btn-sm">Order Sample</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="temple-card">
+            <div class="temple-thumb">
+              <img 
+                src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=700&q=80" 
+                alt="Veda Carved Sheesham Pooja Mandir"
+              >
+              <span class="temple-wood-tag">Sheesham Wood (Rosewood)</span>
+            </div>
+            <div class="temple-details">
+              <span class="temple-category">Modern Compact</span>
+              <h3 class="temple-name">Veda Jali Backlit Temple</h3>
+              <p class="temple-specs">
+                Contemporary laser-cut Om & floral Jali pattern with warm ambient warm LED backlighting and soft-close cabinet doors.
+              </p>
+              <div class="temple-footer">
+                <div class="price-box">
+                  <span class="price-label">Starting at</span>
+                  <span class="price-val">$249.00</span>
+                </div>
+                <a href="#contact" class="btn btn-secondary btn-sm">Order Sample</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="temple-card">
+            <div class="temple-thumb">
+              <img 
+                src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=700&q=80" 
+                alt="Pavithra Open Pillar Temple"
+              >
+              <span class="temple-wood-tag">Seasoned Sagwan Wood</span>
+            </div>
+            <div class="temple-details">
+              <span class="temple-category">Open Pillar Design</span>
+              <h3 class="temple-name">Pavithra Gopuram Mandir</h3>
+              <p class="temple-specs">
+                Hand-turned twin pillars with domed Gopuram top, brass finished latches, and moisture-resistant natural wax finish.
+              </p>
+              <div class="temple-footer">
+                <div class="price-box">
+                  <span class="price-label">Starting at</span>
+                  <span class="price-val">$219.00</span>
+                </div>
+                <a href="#contact" class="btn btn-secondary btn-sm">Order Sample</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Craftsmanship Features -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <div class="feature-boxes">
+          
+          <div class="feature-box">
+            <div class="feature-icon-wrapper">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <h4>100% Solid Seasoned Wood</h4>
+            <p>Naturally treated Teakwood & Sheesham resistant to moisture, borer, and termite attacks.</p>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-icon-wrapper">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+            </div>
+            <h4>Vastu Shastra Principles</h4>
+            <p>Every temple is proportionally engineered to maintain harmonious energy flow and sanctity.</p>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-icon-wrapper">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <h4>Compact & Apartment Ready</h4>
+            <p>Engineered for lightweight wall mounting and easy tabletop placement with concealed brackets.</p>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-icon-wrapper">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                <line x1="12" y1="22.08" x2="12" y2="12"/>
+              </svg>
+            </div>
+            <h4>Zero-Damage Safe Shipping</h4>
+            <p>Crated with 5-layer protective packaging and delivered safely to your doorstep worldwide.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Section with Contact Information -->
+  <footer class="site-footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Store Overview -->
+        <div class="footer-col footer-about">
+          <div class="brand-logo" style="margin-bottom: 16px;">
+            <div class="logo-icon" style="background: #3a1e0f;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v3m0 0l7 5v11a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V10l7-5z"/>
+                <path d="M9 21v-7a3 3 0 0 1 6 0v7"/>
+              </svg>
+            </div>
+            <div class="logo-text">
+              <span class="title" style="color: var(--gold-light);">Shree Ganesh</span>
+              <span class="subtitle" style="color: var(--gold);">Handicrafts</span>
+            </div>
+          </div>
+          <p>
+            At Shree Ganesh Handicrafts, we are dedicated to preserving sacred Indian woodworking traditions. Every temple is handcrafted by generational master artisans with deep devotion, premium seasoned wood, and refined perfection.
+          </p>
+          <div class="footer-socials">
+            <a href="#" class="social-btn" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Pinterest">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0a12 12 0 0 0-4.37 23.18c-.05-.98-.1-2.48.02-3.55.11-.98.74-6.4 1.15-9.94.3-.87 1.4-1.6 2.5-1.6 1.76 0 3.03 1.32 3.03 2.9 0 1.77-1.12 4.41-1.7 6.87-.47 2.03 1 3.69 3 3.69 3.6 0 6.03-4.63 6.03-10.1 0-4.22-2.85-7.39-7.98-7.39-6.2 0-9.6 4.6-9.6 9.4 0 1.77.68 3.67 1.54 4.7.17.2.2.38.15.58-.16.66-.52 2.1-.6 2.39-.09.38-.3.46-.7.28-2.6-1.2-4.22-5-4.22-8.07 0-6.57 4.77-12.6 13.78-12.6 7.24 0 12.86 5.16 12.86 12.05 0 7.19-4.53 12.98-10.82 12.98-2.11 0-4.1-1.1-4.78-2.4l-1.3 4.96c-.47 1.8-1.75 4.07-2.6 5.46A12 12 0 1 0 12 0z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+
+        <!-- Contact Information (The requested store contact details) -->
+        <div class="footer-col">
+          <h3 class="footer-heading">Store Contact</h3>
+          
+          <div class="contact-item">
+            <div class="contact-icon">
+              <!-- Location pin icon -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div class="contact-text">
+              <span class="label">Showroom & Workshop</span>
+              418 Heritage Timber Way, Suite 102<br>
+              Artisan Craft District, CA 90210
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <!-- Phone icon -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div class="contact-text">
+              <span class="label">Direct Phone & WhatsApp</span>
+              <a href="tel:+18005559663">+1 +91 99740 23338</a><br>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <!-- Email icon -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div class="contact-text">
+              <span class="label">Customer Care Email</span>
+              <a href="mailto:info@shreeganeshhandicrafts.com">info@shreeganeshhandicrafts.com</a><br>
+              <a href="mailto:orders@shreeganeshhandicrafts.com">orders@shreeganeshhandicrafts.com</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Store Hours & Newsletter -->
+        <div class="footer-col">
+          <h3 class="footer-heading">Visiting Hours</h3>
+          <div class="hours-badge">
+            <p><strong>Monday – Friday:</strong> 8:30 AM – 7:30 PM</p>
+            <p><strong>Saturday:</strong> 10:00 AM – 6:00 PM</p>
+            <p><strong>Sunday:</strong> 11:00 AM – 4:00 PM (By Appt)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Copyright & Policies -->
+      <div class="footer-bottom">
+        <p>© 2026 Shree Ganesh Handicrafts. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Shipping & Returns</a>
+          <a href="#">Terms of Craftsmanship</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
